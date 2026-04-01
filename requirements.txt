@@ -1,6 +1,7 @@
 streamlit
 polars
 plotly
-adlsfs
+adlfs
 fsspec
 python-dotenv
+azure-storage-blob
