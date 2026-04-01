@@ -79,7 +79,36 @@ with st.spinner("Sincronizando com Azure Data Lake..."):
         st.plotly_chart(fig, use_container_width=True)
 
         # --- TABELA TÉCNICA ---
-        with st.expander("🔍 Ver Tabela de Dados"):
-            st.dataframe(df_variacao.to_pandas(), use_container_width=True)
+        # --- TABELA TÉCNICA REESTILIZADA ---
+        with st.expander("🔍 Ver Detalhes dos Dados por Ano"):
+            # Dicionário de mapeamento para nomes amigáveis
+            mapa_colunas = {
+                "ano_referencia": "Ano",
+                "qtd_viagens": "Qtd. Viagens",
+                "valor_total": "Gasto Total (R$)",
+                "ticket_medio": "Ticket Médio (R$)",
+                "valor_total_ano_anterior": "Gasto Ano Anterior (R$)",
+                "qtd_viagens_ano_anterior": "Viagens Ano Anterior",
+                "variacao_valor_percentual": "Var. Gasto (%)",
+                "variacao_qtd_percentual": "Var. Qtd (%)"
+            }
+
+            # Renomeando e preparando para exibição
+            # .to_pandas() é usado aqui apenas para a renderização final do Streamlit
+            df_display = df_variacao.to_pandas().rename(columns=mapa_colunas)
+
+            # Exibindo a tabela com formatação numérica brasileira
+            st.dataframe(
+                df_display.style.format({
+                    "Gasto Total (R$)": "R$ {:,.2f}",
+                    "Ticket Médio (R$)": "R$ {:,.2f}",
+                    "Gasto Ano Anterior (R$)": "R$ {:,.2f}",
+                    "Var. Gasto (%)": "{:.2f}%",
+                    "Var. Qtd (%)": "{:.2f}%",
+                    "Qtd. Viagens": "{:,}",
+                    "Viagens Ano Anterior": "{:,}"
+                }), 
+                use_container_width=True
+            )
     else:
         st.error("Erro ao carregar dados.")

@@ -1,0 +1,6 @@
+streamlit
+polars
+plotly
+adlsfs
+fsspec
+python-dotenv
