@@ -4,6 +4,11 @@ __pycache__/
 .streamlit/config.toml
 .streamlit/secrets.toml
 
+# Segredos e Credenciais (CRÍTICO)
+.env
+token.json
+client_secret.json
+
 # Dados e Logs
 data/
 *.parquet
