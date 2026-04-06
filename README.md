@@ -1,38 +1,38 @@
-📊 GOVBR Travel Analytics — Azure Data Lake + Polars
+# 📊 GOVBR Travel Analytics — Azure Data Lake + Polars
 
-Este repositório faz parte do ecossistema SIAV (Sistema Inteligente de Auditoria de Viagens). É um dashboard de Business Intelligence (BI) de alta performance desenvolvido para analisar dados de viagens do Governo Federal Brasileiro, processando desde indicadores estratégicos até uma massa de quase 1 milhão de registros de viajantes únicos.
-🚀 Stack Tecnológica
+Este repositório faz parte do ecossistema **SIAV** (Sistema Inteligente de Auditoria de Viagens). É um dashboard de Business Intelligence (BI) de alta performance desenvolvido para analisar dados de viagens do Governo Federal Brasileiro, processando desde indicadores estratégicos até uma massa de quase **1 milhão de registros de viajantes únicos**.
 
-    Linguagem: Python 3.13
+---
 
-    Engine de Dados: Polars (Escrita em Rust, foco em performance e Lazy Evaluation)
+## 🚀 Stack Tecnológica
 
-    Cloud Storage: Azure Data Lake Storage (ADLS Gen2)
+* **Linguagem:** Python 3.13
+* **Engine de Dados:** [Polars](https://pola.rs/) (Rust-based, foco em performance e Lazy Evaluation)
+* **Cloud Storage:** Azure Data Lake Storage (ADLS Gen2)
+* **Frontend:** [Streamlit](https://streamlit.io/) (Multipage App)
+* **Visualização:** Plotly Express & Graph Objects
+* **Infraestrutura:** Hospedado via Streamlit Community Cloud
 
-    Frontend: Streamlit (Multipage App)
+---
 
-    Visualização: Plotly Express & Graph Objects
+## 🏗️ Arquitetura e Diferenciais Técnicos
 
-    Infraestrutura: Hospedado via Streamlit Community Cloud
+### 1. Camada de Dados (Azure + Polars)
+O projeto utiliza o protocolo `az://` para acessar arquivos Parquet diretamente no Azure. O diferencial é o uso de **LazyFrames**, onde as queries são otimizadas antes da execução, reduzindo drasticamente o tráfego de rede e o uso de RAM.
 
-🏗️ Arquitetura e Diferenciais Técnicos
-1. Camada de Dados (Azure + Polars)
+### 2. Data Observability & Compliance
+Diferente de dashboards comuns, este projeto inclui uma página de **Auditoria** que monitora:
+* **Qualidade Técnica:** Percentual de IDs, órgãos e valores inválidos por ano.
+* **Alertas de Compliance:** Identificação de *outliers* de valor e viagens urgentes sem justificativa.
 
-O projeto utiliza o protocolo az:// para acessar arquivos Parquet diretamente no Azure. O diferencial é o uso de LazyFrames, onde as queries são otimizadas antes da execução, reduzindo drasticamente o tráfego de rede e o uso de RAM.
-2. Data Observability & Compliance
+### 3. Big Data no Edge
+A página de **Perfil de Viajantes** processa **976.767 registros**. Utilizando a engine de **Streaming do Polars**, realizamos agregações e buscas textuais em tempo real, otimizadas para hardware com limitações de recursos.
 
-Diferente de dashboards comuns, este projeto inclui uma página de Auditoria que monitora:
+---
 
-    Qualidade Técnica: Percentual de IDs, órgãos e valores inválidos por ano.
+## 📂 Estrutura do Projeto
 
-    Alertas de Compliance: Identificação de outliers de valor e viagens urgentes sem justificativa.
-
-3. Big Data no Edge
-
-A página de Perfil de Viajantes processa 976.767 registros. Utilizando a engine de Streaming do Polars, realizamos agregações e buscas textuais em tempo real, otimizadas para hardware com limitações de recursos.
-📂 Estrutura do Projeto
-Plaintext
-
+```text
 .
 ├── main.py                    # Dashboard Executivo (Home)
 ├── pages/                     # Páginas do Multipage App
