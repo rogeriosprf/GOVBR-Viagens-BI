@@ -1,0 +1,21 @@
+# Streamlit e Python
+__pycache__/
+*.py[cod]
+.streamlit/config.toml
+.streamlit/secrets.toml
+
+# Dados e Logs
+data/
+*.parquet
+*.csv
+*.txt
+
+# Virtual Env
+.venv/
+venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
